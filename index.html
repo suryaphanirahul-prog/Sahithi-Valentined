@@ -1,176 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>For Bujjidana 💖</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>For BujjiDana 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * { box-sizing: border-box; }
+<style>
+*{box-sizing:border-box;}
 
-    body {
-      margin: 0;
-      height: 100vh;
-      font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
-      color: #fff;
-    }
+body{
+  margin:0;
+  height:100vh;
+  font-family:'Segoe UI',sans-serif;
+  overflow:hidden;
+  color:#fff;
+}
 
-    /* Background slideshow */
-    .bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      animation: slide 24s infinite;
-      z-index: -2;
-    }
+/* ===== Romantic scrolling background layers ===== */
+.bg-layer{
+  position:fixed;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  animation: scrollBg 60s linear infinite;
+  z-index:-3;
+  opacity:0.35;
+}
 
-    .bg::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
-    }
+.bg1{background-image:url("bg1.jpg"); animation-duration:70s;}
+.bg2{background-image:url("bg2.jpg"); animation-duration:90s;}
+.bg3{background-image:url("bg3.jpg"); animation-duration:110s;}
+.bg4{background-image:url("bg4.jpg"); animation-duration:130s;}
 
-    @keyframes slide {
-      0%   { background-image: url("bg1.jpg"); }
-      33%  { background-image: url("bg2.jpg"); }
-      66%  { background-image: url("bg3.jpg"); }
-      100% { background-image: url("bg1.jpg"); }
-    }
+@keyframes scrollBg{
+  from{transform:scale(1) translateY(0);}
+  to{transform:scale(1.15) translateY(-120px);}
+}
 
-    .card {
-      position: relative;
-      background: rgba(255,255,255,0.22);
-      backdrop-filter: blur(14px);
-      border-radius: 26px;
-      padding: 34px 28px;
-      text-align: center;
-      width: 350px;
-      margin: auto;
-      top: 50%;
-      transform: translateY(-50%);
-      box-shadow: 0 22px 45px rgba(0,0,0,0.45);
-      animation: fadeIn 1.2s ease;
-    }
+/* Dark romantic overlay */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.45)
+  );
+  z-index:-2;
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-40%); }
-      to   { opacity: 1; transform: translateY(-50%); }
-    }
+/* ===== Card ===== */
+.card{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(255,255,255,0.22);
+  backdrop-filter:blur(14px);
+  border-radius:28px;
+  padding:36px 30px;
+  width:360px;
+  text-align:center;
+  box-shadow:0 25px 55px rgba(0,0,0,0.5);
+  animation:fadeIn 1.3s ease;
+}
 
-    .heart {
-      font-size: 48px;
-      animation: beat 1s infinite;
-    }
+@keyframes fadeIn{
+  from{opacity:0; transform:translate(-50%,-40%);}
+  to{opacity:1; transform:translate(-50%,-50%);}
+}
 
-    @keyframes beat {
-      0%,100% { transform: scale(1); }
-      50% { transform: scale(1.35); }
-    }
+.heart{
+  font-size:52px;
+  animation:beat 1s infinite;
+}
 
-    h1 {
-      margin: 14px 0 10px;
-      font-size: 30px;
-    }
+@keyframes beat{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.35);}
+}
 
-    p {
-      font-size: 18px;
-      line-height: 1.6;
-      margin-bottom: 22px;
-    }
+h1{
+  margin:14px 0 10px;
+  font-size:32px;
+}
 
-    .magic-btn {
-      padding: 14px 32px;
-      font-size: 17px;
-      border-radius: 40px;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(45deg, #ff4d6d, #ff8fab);
-      color: #fff;
-      box-shadow: 0 0 18px rgba(255,77,109,0.9);
-      animation: glow 1.6s infinite alternate;
-    }
+p{
+  font-size:18px;
+  line-height:1.6;
+  margin-bottom:22px;
+}
 
-    @keyframes glow {
-      from { box-shadow: 0 0 14px rgba(255,77,109,0.6); }
-      to   { box-shadow: 0 0 28px rgba(255,77,109,1); }
-    }
+/* ===== Button ===== */
+.magic-btn{
+  padding:15px 36px;
+  font-size:17px;
+  border-radius:40px;
+  border:none;
+  cursor:pointer;
+  background:linear-gradient(45deg,#ff4d6d,#ff8fab);
+  color:#fff;
+  box-shadow:0 0 22px rgba(255,77,109,0.9);
+  animation:glow 1.6s infinite alternate;
+}
 
-    .loader {
-      display: none;
-      margin-top: 14px;
-      font-size: 14px;
-      opacity: 0.9;
-    }
+@keyframes glow{
+  from{box-shadow:0 0 15px rgba(255,77,109,0.6);}
+  to{box-shadow:0 0 32px rgba(255,77,109,1);}
+}
 
-    /* Floating hearts */
-    .float {
-      position: absolute;
-      bottom: -10vh;
-      font-size: 22px;
-      animation: floatUp linear infinite;
-      opacity: 0.85;
-    }
+.loader{
+  display:none;
+  margin-top:14px;
+  font-size:14px;
+  opacity:0.9;
+}
 
-    @keyframes floatUp {
-      to {
-        transform: translateY(-120vh) rotate(360deg);
-      }
-    }
-  </style>
+/* ===== Floating love icons ===== */
+.float{
+  position:absolute;
+  bottom:-10vh;
+  font-size:22px;
+  animation:floatUp linear infinite;
+  opacity:0.85;
+}
+
+@keyframes floatUp{
+  to{transform:translateY(-120vh) rotate(360deg);}
+}
+</style>
 </head>
+
 <body>
 
-  <!-- Background slideshow -->
-  <div class="bg"></div>
+<!-- Romantic scrolling background -->
+<div class="bg-layer bg1"></div>
+<div class="bg-layer bg2"></div>
+<div class="bg-layer bg3"></div>
+<div class="bg-layer bg4"></div>
+<div class="overlay"></div>
 
-  <!-- Background Music -->
-  <audio autoplay loop>
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
+<!-- Romantic background music -->
+<audio autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-  <div class="card">
-    <div class="heart">💘</div>
-    <h1>Sahithi 😜</h1>
-    <p>
-      Happy Valentine’s Day 💕<br>
-      Every moment with you<br>
-      feels like my favorite love story 😏❤️
-    </p>
+<!-- Card -->
+<div class="card">
+  <div class="heart">💘</div>
+  <h1>BujjiDana 😜</h1>
+  <p>
+    Happy Valentine’s Day 💕<br>
+    Every moment with you<br>
+    feels like my favorite love story 😏❤️
+  </p>
 
-    <button class="magic-btn" onclick="openLove()">Open My Heart 💖</button>
+  <button class="magic-btn" onclick="openLove()">Open My Heart 💖</button>
 
-    <div class="loader" id="loader">
-      Opening something special for you… 💞
-    </div>
+  <div class="loader" id="loader">
+    Opening something special for you… 💞
   </div>
+</div>
 
-  <script>
-    function openLove() {
-      document.getElementById("loader").style.display = "block";
-      setTimeout(() => {
-        window.open("https://sahithi-225.tiiny.site", "_blank");
-      }, 1800);
-    }
+<script>
+function openLove(){
+  document.getElementById("loader").style.display="block";
+  setTimeout(()=>{
+    window.open("https://sahithi-225.tiiny.site","_blank");
+  },1800);
+}
 
-    // Floating hearts
-    const icons = ["💖","💘","❤️","😍","😘"];
-    for (let i = 0; i < 28; i++) {
-      const span = document.createElement("span");
-      span.className = "float";
-      span.innerText = icons[Math.floor(Math.random()*icons.length)];
-      span.style.left = Math.random()*100 + "vw";
-      span.style.animationDuration = (6 + Math.random()*6) + "s";
-      span.style.fontSize = (18 + Math.random()*12) + "px";
-      document.body.appendChild(span);
-    }
-  </script>
+/* Floating hearts */
+const icons=["💖","💘","❤️","😍","😘","🌹"];
+for(let i=0;i<35;i++){
+  const span=document.createElement("span");
+  span.className="float";
+  span.innerText=icons[Math.floor(Math.random()*icons.length)];
+  span.style.left=Math.random()*100+"vw";
+  span.style.animationDuration=(6+Math.random()*8)+"s";
+  span.style.fontSize=(18+Math.random()*14)+"px";
+  document.body.appendChild(span);
+}
+</script>
 
 </body>
 </html>
-
