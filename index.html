@@ -7,6 +7,7 @@
 
 <style>
 *{box-sizing:border-box;}
+
 body{
   margin:0;
   height:100vh;
@@ -15,16 +16,47 @@ body{
   color:#fff;
 }
 
-/* Background */
-.bg{
+/* ===== BACKGROUND SLIDESHOW USING YOUR IMAGES ===== */
+.bg-container{
   position:fixed;
   inset:0;
-  background:url("bg1.jpg") center/cover no-repeat;
-  filter:brightness(0.4);
-  z-index:-2;
+  z-index:-4;
 }
 
-/* Card */
+.bg-slide{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  animation:bgFade 32s infinite;
+}
+
+.bg1{background-image:url("bg1.jpg"); animation-delay:0s;}
+.bg2{background-image:url("bg2.jpg"); animation-delay:8s;}
+.bg3{background-image:url("bg3.jpg"); animation-delay:16s;}
+.bg4{background-image:url("bg4.jpg"); animation-delay:24s;}
+
+@keyframes bgFade{
+  0%{opacity:0; transform:scale(1);}
+  10%{opacity:1;}
+  40%{opacity:1; transform:scale(1.08);}
+  50%{opacity:0;}
+  100%{opacity:0;}
+}
+
+/* Romantic overlay */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.7)
+  );
+  z-index:-3;
+}
+
+/* ===== CARD ===== */
 .card{
   position:absolute;
   top:50%;
@@ -37,9 +69,36 @@ body{
   width:360px;
   text-align:center;
   box-shadow:0 30px 60px rgba(0,0,0,0.55);
+  animation:fadeIn 1.4s ease;
 }
 
-.heart{font-size:56px;}
+@keyframes fadeIn{
+  from{opacity:0; transform:translate(-50%,-40%);}
+  to{opacity:1; transform:translate(-50%,-50%);}
+}
+
+.heart{
+  font-size:56px;
+  animation:beat 1s infinite;
+}
+
+@keyframes beat{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.35);}
+}
+
+h1{
+  margin:16px 0 12px;
+  font-size:32px;
+}
+
+p{
+  font-size:18px;
+  line-height:1.6;
+  margin-bottom:24px;
+}
+
+/* ===== BUTTON ===== */
 .magic-btn{
   padding:16px 38px;
   font-size:17px;
@@ -48,28 +107,57 @@ body{
   cursor:pointer;
   background:linear-gradient(45deg,#ff4d6d,#ff8fab);
   color:#fff;
+  box-shadow:0 0 26px rgba(255,77,109,1);
+  animation:glow 1.6s infinite alternate;
+}
+
+@keyframes glow{
+  from{box-shadow:0 0 18px rgba(255,77,109,0.7);}
+  to{box-shadow:0 0 36px rgba(255,77,109,1);}
 }
 
 .hidden{display:none;}
+
+/* ===== PETAL IMAGE FALL ===== */
+.petal{
+  position:absolute;
+  top:-10vh;
+  opacity:0.85;
+  animation:fall linear infinite;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(120vh) rotate(360deg);
+  }
+}
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
+<!-- Background slideshow -->
+<div class="bg-container">
+  <div class="bg-slide bg1"></div>
+  <div class="bg-slide bg2"></div>
+  <div class="bg-slide bg3"></div>
+  <div class="bg-slide bg4"></div>
+</div>
+<div class="overlay"></div>
 
+<!-- Music (user interaction safe) -->
 <audio id="loveMusic" preload="auto" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
+<!-- Card -->
 <div class="card">
   <div class="heart">💘</div>
   <h1>BujjiDana 😜</h1>
-
   <p>
     Happy Valentine’s Day 💕<br>
     Every moment with you<br>
-    feels like my favorite love story ❤️
+    feels like my favorite love story 😏❤️
   </p>
 
   <!-- STEP 1 -->
@@ -80,18 +168,19 @@ body{
     Open My Heart 💖
   </button>
 </div>
-  
+
 <script>
+/* Music logic (100% browser-safe) */
 const music = document.getElementById("loveMusic");
 const playBtn = document.getElementById("playBtn");
 const openBtn = document.getElementById("openBtn");
 
 playBtn.onclick = () => {
   music.volume = 0.8;
-  music.play().then(() => {
-    playBtn.style.display = "none";
+  music.play().then(()=>{
+    playBtn.style.display="none";
     openBtn.classList.remove("hidden");
-  }).catch(e => {
+  }).catch(()=>{
     alert("Click again to start music 🎵");
   });
 };
@@ -99,9 +188,18 @@ playBtn.onclick = () => {
 openBtn.onclick = () => {
   window.open("https://sahithi-225.tiiny.site","_blank");
 };
+
+/* Petal images using YOUR petal.png */
+for(let i=0;i<30;i++){
+  const img=document.createElement("img");
+  img.src="petal.png";
+  img.className="petal";
+  img.style.left=Math.random()*100+"vw";
+  img.style.animationDuration=(8+Math.random()*10)+"s";
+  img.style.width=(20+Math.random()*25)+"px";
+  document.body.appendChild(img);
+}
 </script>
 
 </body>
 </html>
-
-
