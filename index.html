@@ -14,46 +14,15 @@ body{
   font-family:'Segoe UI',sans-serif;
   overflow:hidden;
   color:#fff;
-}
 
-/* ===== BACKGROUND SLIDESHOW USING YOUR IMAGES ===== */
-.bg-container{
-  position:fixed;
-  inset:0;
-  z-index:-4;
-}
+  /* 🌸 PETAL AS BACKGROUND IMAGE */
+  background:
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
+    url("petal.png");
 
-.bg-slide{
-  position:absolute;
-  inset:0;
-  background-size:cover;
-  background-position:center;
-  opacity:0;
-  animation:bgFade 32s infinite;
-}
-
-.bg1{background-image:url("bg1.jpg"); animation-delay:0s;}
-.bg2{background-image:url("bg2.jpg"); animation-delay:8s;}
-.bg3{background-image:url("bg3.jpg"); animation-delay:16s;}
-.bg4{background-image:url("bg4.jpg"); animation-delay:24s;}
-
-@keyframes bgFade{
-  0%{opacity:0; transform:scale(1);}
-  10%{opacity:1;}
-  40%{opacity:1; transform:scale(1.08);}
-  50%{opacity:0;}
-  100%{opacity:0;}
-}
-
-/* Romantic overlay */
-.overlay{
-  position:fixed;
-  inset:0;
-  background:linear-gradient(
-    rgba(0,0,0,0.55),
-    rgba(0,0,0,0.7)
-  );
-  z-index:-3;
+  background-repeat: repeat;
+  background-size: 120px 120px;   /* controls petal size */
+  background-position: center;
 }
 
 /* ===== CARD ===== */
@@ -117,35 +86,12 @@ p{
 }
 
 .hidden{display:none;}
-
-/* ===== PETAL IMAGE FALL ===== */
-.petal{
-  position:absolute;
-  top:-10vh;
-  opacity:0.85;
-  animation:fall linear infinite;
-}
-
-@keyframes fall{
-  to{
-    transform:translateY(120vh) rotate(360deg);
-  }
-}
 </style>
 </head>
 
 <body>
 
-<!-- Background slideshow -->
-<div class="bg-container">
-  <div class="bg-slide bg1"></div>
-  <div class="bg-slide bg2"></div>
-  <div class="bg-slide bg3"></div>
-  <div class="bg-slide bg4"></div>
-</div>
-<div class="overlay"></div>
-
-<!-- Music (user interaction safe) -->
+<!-- Music -->
 <audio id="loveMusic" preload="auto" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -160,17 +106,11 @@ p{
     feels like my favorite love story 😏❤️
   </p>
 
-  <!-- STEP 1 -->
   <button class="magic-btn" id="playBtn">Play Our Song 🎵</button>
-
-  <!-- STEP 2 -->
-  <button class="magic-btn hidden" id="openBtn">
-    Open My Heart 💖
-  </button>
+  <button class="magic-btn hidden" id="openBtn">Open My Heart 💖</button>
 </div>
 
 <script>
-/* Music logic (100% browser-safe) */
 const music = document.getElementById("loveMusic");
 const playBtn = document.getElementById("playBtn");
 const openBtn = document.getElementById("openBtn");
@@ -188,17 +128,6 @@ playBtn.onclick = () => {
 openBtn.onclick = () => {
   window.open("https://sahithi-225.tiiny.site","_blank");
 };
-
-/* Petal images using YOUR petal.png */
-for(let i=0;i<30;i++){
-  const img=document.createElement("img");
-  img.src="petal.png";
-  img.className="petal";
-  img.style.left=Math.random()*100+"vw";
-  img.style.animationDuration=(8+Math.random()*10)+"s";
-  img.style.width=(20+Math.random()*25)+"px";
-  document.body.appendChild(img);
-}
 </script>
 
 </body>
