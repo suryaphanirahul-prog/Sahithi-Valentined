@@ -11,110 +11,125 @@
     body {
       margin: 0;
       height: 100vh;
-      background:
-        linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-        url("bg.jpg") no-repeat center / cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       font-family: 'Segoe UI', sans-serif;
       overflow: hidden;
+      color: #fff;
+    }
+
+    /* Background slideshow */
+    .bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      animation: slide 24s infinite;
+      z-index: -2;
+    }
+
+    .bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+    }
+
+    @keyframes slide {
+      0%   { background-image: url("bg1.jpg"); }
+      33%  { background-image: url("bg2.jpg"); }
+      66%  { background-image: url("bg3.jpg"); }
+      100% { background-image: url("bg1.jpg"); }
     }
 
     .card {
-      background: rgba(255,255,255,0.25);
+      position: relative;
+      background: rgba(255,255,255,0.22);
       backdrop-filter: blur(14px);
       border-radius: 26px;
-      padding: 32px 26px;
+      padding: 34px 28px;
       text-align: center;
-      color: #fff;
-      width: 340px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.4);
-      animation: pop 0.9s ease;
+      width: 350px;
+      margin: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      box-shadow: 0 22px 45px rgba(0,0,0,0.45);
+      animation: fadeIn 1.2s ease;
     }
 
-    @keyframes pop {
-      from { transform: scale(0.85); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-40%); }
+      to   { opacity: 1; transform: translateY(-50%); }
     }
 
     .heart {
-      font-size: 46px;
+      font-size: 48px;
       animation: beat 1s infinite;
     }
 
     @keyframes beat {
       0%,100% { transform: scale(1); }
-      50% { transform: scale(1.3); }
+      50% { transform: scale(1.35); }
     }
 
     h1 {
-      margin: 12px 0 8px;
-      font-size: 28px;
+      margin: 14px 0 10px;
+      font-size: 30px;
     }
 
     p {
-      font-size: 17px;
-      line-height: 1.5;
-      margin-bottom: 16px;
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 22px;
     }
 
-    button {
+    .magic-btn {
+      padding: 14px 32px;
+      font-size: 17px;
+      border-radius: 40px;
       border: none;
-      padding: 10px 24px;
-      border-radius: 30px;
-      font-size: 15px;
-      background: #fff;
-      color: #ff4d6d;
       cursor: pointer;
-      transition: 0.3s;
-      margin-bottom: 12px;
-    }
-
-    button:hover {
-      background: #ffe3ec;
-      transform: scale(1.07);
-    }
-
-    .hidden {
-      display: none;
-      margin-top: 12px;
-      font-size: 17px;
-    }
-
-    .qr {
-      margin-top: 16px;
-      background: #fff;
-      padding: 10px;
-      border-radius: 14px;
-      display: inline-block;
-    }
-
-    .qr-text {
-      font-size: 13px;
-      margin-top: 6px;
+      background: linear-gradient(45deg, #ff4d6d, #ff8fab);
       color: #fff;
+      box-shadow: 0 0 18px rgba(255,77,109,0.9);
+      animation: glow 1.6s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 14px rgba(255,77,109,0.6); }
+      to   { box-shadow: 0 0 28px rgba(255,77,109,1); }
+    }
+
+    .loader {
+      display: none;
+      margin-top: 14px;
+      font-size: 14px;
       opacity: 0.9;
     }
 
-    .petal {
+    /* Floating hearts */
+    .float {
       position: absolute;
-      top: -10vh;
+      bottom: -10vh;
       font-size: 22px;
-      animation: fall linear infinite;
-      opacity: 0.9;
+      animation: floatUp linear infinite;
+      opacity: 0.85;
     }
 
-    @keyframes fall {
+    @keyframes floatUp {
       to {
-        transform: translateY(110vh) rotate(360deg);
+        transform: translateY(-120vh) rotate(360deg);
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Romantic Music -->
+  <!-- Background slideshow -->
+  <div class="bg"></div>
+
+  <!-- Background Music -->
   <audio autoplay loop>
     <source src="music.mp3" type="audio/mpeg">
   </audio>
@@ -122,42 +137,36 @@
   <div class="card">
     <div class="heart">💘</div>
     <h1>Sahithi 😜</h1>
-
     <p>
       Happy Valentine’s Day 💕<br>
-      My favorite person to tease,<br>
-      love & keep forever 😏❤️
+      Every moment with you<br>
+      feels like my favorite love story 😏❤️
     </p>
 
-    <button onclick="revealLove()">Tap here 😄</button>
+    <button class="magic-btn" onclick="openLove()">Open My Heart 💖</button>
 
-    <div class="hidden" id="secret">
-      You’re stuck with me forever 💖😉
+    <div class="loader" id="loader">
+      Opening something special for you… 💞
     </div>
-
-    <!-- QR CODE -->
-    <div class="qr">
-      <img
-        src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://sahithi-225.tiiny.site"
-        alt="Valentine QR Code">
-    </div>
-    <div class="qr-text">Scan me 💕</div>
   </div>
 
   <script>
-    function revealLove() {
-      document.getElementById("secret").style.display = "block";
+    function openLove() {
+      document.getElementById("loader").style.display = "block";
+      setTimeout(() => {
+        window.open("https://sahithi-225.tiiny.site", "_blank");
+      }, 1800);
     }
 
-    // Rose petals
-    const petals = ["🌹","🌸","💖"];
-    for (let i = 0; i < 25; i++) {
+    // Floating hearts
+    const icons = ["💖","💘","❤️","😍","😘"];
+    for (let i = 0; i < 28; i++) {
       const span = document.createElement("span");
-      span.className = "petal";
-      span.innerText = petals[Math.floor(Math.random() * petals.length)];
-      span.style.left = Math.random() * 100 + "vw";
-      span.style.animationDuration = (6 + Math.random() * 6) + "s";
-      span.style.fontSize = (18 + Math.random() * 10) + "px";
+      span.className = "float";
+      span.innerText = icons[Math.floor(Math.random()*icons.length)];
+      span.style.left = Math.random()*100 + "vw";
+      span.style.animationDuration = (6 + Math.random()*6) + "s";
+      span.style.fontSize = (18 + Math.random()*12) + "px";
       document.body.appendChild(span);
     }
   </script>
