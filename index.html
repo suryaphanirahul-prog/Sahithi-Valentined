@@ -140,9 +140,10 @@ p{
 <div class="overlay"></div>
 
 <!-- Romantic background music -->
-<audio autoplay loop>
+<audio id="loveMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
+
 
 <!-- Card -->
 <div class="card">
@@ -162,12 +163,19 @@ p{
 </div>
 
 <script>
+<script>
 function openLove(){
-  document.getElementById("loader").style.display="block";
+  const music = document.getElementById("loveMusic");
+  music.play().catch(()=>{});
+
+  document.getElementById("loader").style.display = "block";
+
   setTimeout(()=>{
     window.open("https://sahithi-225.tiiny.site","_blank");
   },1800);
 }
+</script>
+
 
 /* Floating hearts */
 const icons=["💖","💘","❤️","😍","😘","🌹"];
@@ -184,3 +192,4 @@ for(let i=0;i<35;i++){
 
 </body>
 </html>
+
