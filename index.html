@@ -190,7 +190,7 @@ openBtn.onclick = () => {
 };
 
 /* Petal images using YOUR petal.png */
-const petalSize = 40; // average size in px
+const petalSize = 20; // average size in px
 const cols = Math.ceil(window.innerWidth / petalSize);
 const rows = Math.ceil(window.innerHeight / petalSize);
 
@@ -205,7 +205,7 @@ for (let y = 0; y < rows; y++) {
     img.style.top  = (y * petalSize + Math.random() * 20) + "px";
 
     // Size & animation
-    img.style.width = (30 + Math.random() * 20) + "px";
+    img.style.width = (10 + Math.random() * 20) + "px";
     img.style.animationDuration = (12 + Math.random() * 10) + "s";
 
     document.body.appendChild(img);
@@ -215,6 +215,7 @@ for (let y = 0; y < rows; y++) {
 
 </body>
 </html>
+
 
 
 
