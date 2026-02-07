@@ -114,12 +114,11 @@ p{
   opacity:0.9;
 }
 
-/* ===== Floating romantic images (petals/hearts) ===== */
+/* ===== Floating romantic images ===== */
 .fall{
   position:absolute;
   top:-10vh;
-  width:30px;
-  opacity:0.8;
+  opacity:0.85;
   animation:fall linear infinite;
 }
 
@@ -140,8 +139,8 @@ p{
 <div class="bg-layer bg4"></div>
 <div class="overlay"></div>
 
-<!-- Romantic music (plays on click) -->
-<audio id="loveMusic" loop>
+<!-- Romantic music (browser-safe) -->
+<audio id="loveMusic" preload="auto" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
@@ -158,24 +157,32 @@ p{
   <button class="magic-btn" onclick="openLove()">Open My Heart 💖</button>
 
   <div class="loader" id="loader">
-    Opening something special for you… 💞
+    Starting our love song… 🎶💞
   </div>
 </div>
 
 <script>
 function openLove(){
   const music = document.getElementById("loveMusic");
-  music.play().catch(()=>{});
 
-  document.getElementById("loader").style.display="block";
+  music.volume = 0.8;
+  music.muted = false;
+
+  music.play().then(() => {
+    console.log("Music playing");
+  }).catch(err => {
+    console.log("Music blocked:", err);
+  });
+
+  document.getElementById("loader").style.display = "block";
 
   setTimeout(()=>{
     window.open("https://sahithi-225.tiiny.site","_blank");
-  },1800);
+  },3000);
 }
 
-/* Floating romantic images */
-for(let i=0;i<30;i++){
+/* Floating romantic images (petals/hearts PNG) */
+for(let i=0;i<32;i++){
   const img=document.createElement("img");
   img.src="petal.png";
   img.className="fall";
