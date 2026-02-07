@@ -119,18 +119,21 @@ p{
 .hidden{display:none;}
 
 /* ===== PETAL IMAGE FALL ===== */
-.petal{
+  .petal{
   position:absolute;
-  top:-10vh;
-  opacity:0.85;
+  pointer-events:none;
   animation:fall linear infinite;
 }
 
 @keyframes fall{
+  from{
+    transform: translateY(0) rotate(0deg);
+  }
   to{
-    transform:translateY(120vh) rotate(360deg);
+    transform: translateY(-130vh) rotate(180deg);
   }
 }
+
 </style>
 </head>
 
@@ -190,31 +193,35 @@ openBtn.onclick = () => {
 };
 
 /* Petal images using YOUR petal.png */
-const petalSize = 20; // average size in px
-const cols = Math.ceil(window.innerWidth / petalSize);
-const rows = Math.ceil(window.innerHeight / petalSize);
+const maxPetals = 35;     // total petals (clean look)
+let currentPetals = 0;
 
-for (let y = 0; y < rows; y++) {
-  for (let x = 0; x < cols; x++) {
-    const img = document.createElement("img");
-    img.src = "petal.png";
-    img.className = "petal";
+function addPetal(){
+  if(currentPetals >= maxPetals) return;
 
-    // Position
-    img.style.left = (x * petalSize + Math.random() * 20) + "px";
-    img.style.top  = (y * petalSize + Math.random() * 20) + "px";
+  const img = document.createElement("img");
+  img.src = "petal.png";
+  img.className = "petal";
 
-    // Size & animation
-    img.style.width = (10 + Math.random() * 20) + "px";
-    img.style.animationDuration = (12 + Math.random() * 10) + "s";
+  img.style.left = Math.random() * 100 + "vw";
+  img.style.top = "110vh";                       // start below screen
+  img.style.width = (14 + Math.random() * 14) + "px";
+  img.style.opacity = 0.45;                      // softer
+  img.style.animationDuration = (30 + Math.random() * 15) + "s";
+  // img.style.animationDuration = (30 + Math.random() * 20) + "s";
 
-    document.body.appendChild(img);
-  }
+
+  document.body.appendChild(img);
+  currentPetals++;
 }
+
+// Slowly add petals (smooth & elegant)
+setInterval(addPetal, 800);
 </script>
 
 </body>
 </html>
+
 
 
 
