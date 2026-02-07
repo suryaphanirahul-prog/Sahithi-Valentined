@@ -22,30 +22,29 @@ body{
   inset:0;
   background-size:cover;
   background-position:center;
-  animation: scrollBg 60s linear infinite;
-  z-index:-3;
-  opacity:0.35;
+  animation: scrollBg linear infinite;
+  z-index:-4;
 }
 
-.bg1{background-image:url("bg1.jpg"); animation-duration:70s;}
-.bg2{background-image:url("bg2.jpg"); animation-duration:90s;}
-.bg3{background-image:url("bg3.jpg"); animation-duration:110s;}
-.bg4{background-image:url("bg4.jpg"); animation-duration:130s;}
+.bg1{background-image:url("bg1.jpg"); animation-duration:80s; opacity:0.55;}
+.bg2{background-image:url("bg2.jpg"); animation-duration:100s; opacity:0.45;}
+.bg3{background-image:url("bg3.jpg"); animation-duration:120s; opacity:0.40;}
+.bg4{background-image:url("bg4.jpg"); animation-duration:140s; opacity:0.35;}
 
 @keyframes scrollBg{
   from{transform:scale(1) translateY(0);}
-  to{transform:scale(1.15) translateY(-120px);}
+  to{transform:scale(1.2) translateY(-180px);}
 }
 
-/* Dark romantic overlay */
+/* Romantic dark overlay */
 .overlay{
   position:fixed;
   inset:0;
   background:linear-gradient(
     rgba(0,0,0,0.55),
-    rgba(0,0,0,0.45)
+    rgba(0,0,0,0.65)
   );
-  z-index:-2;
+  z-index:-3;
 }
 
 /* ===== Card ===== */
@@ -55,13 +54,13 @@ body{
   left:50%;
   transform:translate(-50%,-50%);
   background:rgba(255,255,255,0.22);
-  backdrop-filter:blur(14px);
-  border-radius:28px;
-  padding:36px 30px;
+  backdrop-filter:blur(16px);
+  border-radius:30px;
+  padding:38px 32px;
   width:360px;
   text-align:center;
-  box-shadow:0 25px 55px rgba(0,0,0,0.5);
-  animation:fadeIn 1.3s ease;
+  box-shadow:0 30px 60px rgba(0,0,0,0.55);
+  animation:fadeIn 1.4s ease;
 }
 
 @keyframes fadeIn{
@@ -70,7 +69,7 @@ body{
 }
 
 .heart{
-  font-size:52px;
+  font-size:56px;
   animation:beat 1s infinite;
 }
 
@@ -80,70 +79,71 @@ body{
 }
 
 h1{
-  margin:14px 0 10px;
+  margin:16px 0 12px;
   font-size:32px;
 }
 
 p{
   font-size:18px;
   line-height:1.6;
-  margin-bottom:22px;
+  margin-bottom:24px;
 }
 
 /* ===== Button ===== */
 .magic-btn{
-  padding:15px 36px;
+  padding:16px 38px;
   font-size:17px;
   border-radius:40px;
   border:none;
   cursor:pointer;
   background:linear-gradient(45deg,#ff4d6d,#ff8fab);
   color:#fff;
-  box-shadow:0 0 22px rgba(255,77,109,0.9);
+  box-shadow:0 0 26px rgba(255,77,109,1);
   animation:glow 1.6s infinite alternate;
 }
 
 @keyframes glow{
-  from{box-shadow:0 0 15px rgba(255,77,109,0.6);}
-  to{box-shadow:0 0 32px rgba(255,77,109,1);}
+  from{box-shadow:0 0 18px rgba(255,77,109,0.7);}
+  to{box-shadow:0 0 36px rgba(255,77,109,1);}
 }
 
 .loader{
   display:none;
-  margin-top:14px;
+  margin-top:16px;
   font-size:14px;
   opacity:0.9;
 }
 
-/* ===== Floating love icons ===== */
-.float{
+/* ===== Floating romantic images (petals/hearts) ===== */
+.fall{
   position:absolute;
-  bottom:-10vh;
-  font-size:22px;
-  animation:floatUp linear infinite;
-  opacity:0.85;
+  top:-10vh;
+  width:30px;
+  opacity:0.8;
+  animation:fall linear infinite;
 }
 
-@keyframes floatUp{
-  to{transform:translateY(-120vh) rotate(360deg);}
+@keyframes fall{
+  to{
+    transform:translateY(120vh) rotate(360deg);
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Romantic scrolling background -->
+<!-- Background layers -->
 <div class="bg-layer bg1"></div>
 <div class="bg-layer bg2"></div>
 <div class="bg-layer bg3"></div>
 <div class="bg-layer bg4"></div>
 <div class="overlay"></div>
 
-<!-- Romantic background music -->
+<!-- Romantic music (plays on click) -->
 <audio id="loveMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
-
 
 <!-- Card -->
 <div class="card">
@@ -163,33 +163,28 @@ p{
 </div>
 
 <script>
-<script>
 function openLove(){
   const music = document.getElementById("loveMusic");
   music.play().catch(()=>{});
 
-  document.getElementById("loader").style.display = "block";
+  document.getElementById("loader").style.display="block";
 
   setTimeout(()=>{
     window.open("https://sahithi-225.tiiny.site","_blank");
   },1800);
 }
-</script>
 
-
-/* Floating hearts */
-const icons=["💖","💘","❤️","😍","😘","🌹"];
-for(let i=0;i<35;i++){
-  const span=document.createElement("span");
-  span.className="float";
-  span.innerText=icons[Math.floor(Math.random()*icons.length)];
-  span.style.left=Math.random()*100+"vw";
-  span.style.animationDuration=(6+Math.random()*8)+"s";
-  span.style.fontSize=(18+Math.random()*14)+"px";
-  document.body.appendChild(span);
+/* Floating romantic images */
+for(let i=0;i<30;i++){
+  const img=document.createElement("img");
+  img.src="petal.png";
+  img.className="fall";
+  img.style.left=Math.random()*100+"vw";
+  img.style.animationDuration=(8+Math.random()*10)+"s";
+  img.style.width=(20+Math.random()*25)+"px";
+  document.body.appendChild(img);
 }
 </script>
 
 </body>
 </html>
-
