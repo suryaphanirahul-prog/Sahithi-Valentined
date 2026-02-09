@@ -16,7 +16,7 @@ body{
   color:#fff;
 }
 
-/* ===== BACKGROUND SLIDESHOW USING YOUR IMAGES ===== */
+/* ===== BACKGROUND SLIDESHOW ===== */
 .bg-container{
   position:fixed;
   inset:0;
@@ -45,7 +45,7 @@ body{
   100%{opacity:0;}
 }
 
-/* Romantic overlay */
+/* Overlay */
 .overlay{
   position:fixed;
   inset:0;
@@ -70,6 +70,7 @@ body{
   text-align:center;
   box-shadow:0 30px 60px rgba(0,0,0,0.55);
   animation:fadeIn 1.4s ease;
+  z-index:2;
 }
 
 @keyframes fadeIn{
@@ -118,28 +119,28 @@ p{
 
 .hidden{display:none;}
 
-/* ===== PETAL IMAGE FALL ===== */
-  .petal{
-  position:absolute;
+/* ===== PETALS ===== */
+.petal{
+  position:fixed;
   pointer-events:none;
+  z-index:1; /* above overlay, below card */
   animation:fall linear infinite;
 }
 
 @keyframes fall{
   from{
-    transform: translateY(0) rotate(0deg);
+    transform:translateY(-10vh) rotate(0deg);
   }
   to{
-    transform: translateY(-130vh) rotate(180deg);
+    transform:translateY(110vh) rotate(360deg);
   }
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- Background slideshow -->
+<!-- Background -->
 <div class="bg-container">
   <div class="bg-slide bg1"></div>
   <div class="bg-slide bg2"></div>
@@ -148,7 +149,7 @@ p{
 </div>
 <div class="overlay"></div>
 
-<!-- Music (user interaction safe) -->
+<!-- Music -->
 <audio id="loveMusic" preload="auto" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -163,17 +164,12 @@ p{
     feels like my favorite love story 😏❤️
   </p>
 
-  <!-- STEP 1 -->
   <button class="magic-btn" id="playBtn">Play Our Song 🎵</button>
-
-  <!-- STEP 2 -->
-  <button class="magic-btn hidden" id="openBtn">
-    Open My Heart 💖
-  </button>
+  <button class="magic-btn hidden" id="openBtn">Open My Heart 💖</button>
 </div>
 
 <script>
-/* Music logic (100% browser-safe) */
+/* Music logic */
 const music = document.getElementById("loveMusic");
 const playBtn = document.getElementById("playBtn");
 const openBtn = document.getElementById("openBtn");
@@ -184,7 +180,7 @@ playBtn.onclick = () => {
     playBtn.style.display="none";
     openBtn.classList.remove("hidden");
   }).catch(()=>{
-    alert("Click again to start music 🎵");
+    alert("Tap once more 🎵");
   });
 };
 
@@ -192,8 +188,8 @@ openBtn.onclick = () => {
   window.open("https://sahithi-225.tiiny.site","_blank");
 };
 
-/* Petal images using YOUR petal.png */
-const maxPetals = 35;     // total petals (clean look)
+/* ===== PETAL LOGIC ===== */
+const maxPetals = 35;
 let currentPetals = 0;
 
 function addPetal(){
@@ -204,26 +200,17 @@ function addPetal(){
   img.className = "petal";
 
   img.style.left = Math.random() * 100 + "vw";
-  img.style.top = "110vh";                       // start below screen
-  img.style.width = (14 + Math.random() * 14) + "px";
-  img.style.opacity = 0.45;                      // softer
-  img.style.animationDuration = (30 + Math.random() * 15) + "s";
-  // img.style.animationDuration = (30 + Math.random() * 20) + "s";
-
+  img.style.top = "-10vh";
+  img.style.width = (14 + Math.random() * 16) + "px";
+  img.style.opacity = 0.6;
+  img.style.animationDuration = (18 + Math.random() * 12) + "s";
 
   document.body.appendChild(img);
   currentPetals++;
 }
 
-// Slowly add petals (smooth & elegant)
-setInterval(addPetal, 800);
+setInterval(addPetal, 700);
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
