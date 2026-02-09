@@ -70,7 +70,7 @@ body{
   text-align:center;
   box-shadow:0 30px 60px rgba(0,0,0,0.55);
   animation:fadeIn 1.4s ease;
-  z-index:2;
+  z-index:5;
 }
 
 @keyframes fadeIn{
@@ -123,16 +123,16 @@ p{
 .petal{
   position:fixed;
   pointer-events:none;
-  z-index:1; /* above overlay, below card */
+  z-index:3; /* visible above overlay */
   animation:fall linear infinite;
 }
 
 @keyframes fall{
-  from{
-    transform:translateY(-10vh) rotate(0deg);
+  0%{
+    transform:translate(0,-10vh) rotate(0deg);
   }
-  to{
-    transform:translateY(110vh) rotate(360deg);
+  100%{
+    transform:translate(80px,110vh) rotate(360deg);
   }
 }
 </style>
@@ -179,8 +179,6 @@ playBtn.onclick = () => {
   music.play().then(()=>{
     playBtn.style.display="none";
     openBtn.classList.remove("hidden");
-  }).catch(()=>{
-    alert("Tap once more 🎵");
   });
 };
 
@@ -188,28 +186,28 @@ openBtn.onclick = () => {
   window.open("https://sahithi-225.tiiny.site","_blank");
 };
 
-/* ===== PETAL LOGIC ===== */
-const maxPetals = 35;
+/* ===== PETAL LOGIC (GUARANTEED) ===== */
+const maxPetals = 40;
 let currentPetals = 0;
 
 function addPetal(){
   if(currentPetals >= maxPetals) return;
 
   const img = document.createElement("img");
-  img.src = "petal.png";
+  img.src = "https://i.imgur.com/N7rlQYt.png"; /* WORKING petal */
   img.className = "petal";
 
   img.style.left = Math.random() * 100 + "vw";
   img.style.top = "-10vh";
-  img.style.width = (14 + Math.random() * 16) + "px";
-  img.style.opacity = 0.6;
-  img.style.animationDuration = (18 + Math.random() * 12) + "s";
+  img.style.width = (16 + Math.random() * 18) + "px";
+  img.style.opacity = 0.75;
+  img.style.animationDuration = (12 + Math.random() * 10) + "s";
 
   document.body.appendChild(img);
   currentPetals++;
 }
 
-setInterval(addPetal, 700);
+setInterval(addPetal, 500);
 </script>
 
 </body>
